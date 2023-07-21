@@ -31,6 +31,26 @@ CONST = 10e-4
 
 class ASTFileParser():
 
+    __slots__ = (
+        "_parser",
+        "_filepath",
+        "_tree",
+        "_root",
+        "_AST",
+        "_counts",
+        "_function_calls",
+        "_imports",
+        "_function_definitions",
+        "_edges_to_add",
+        "_assignments",
+        "_classes",
+        "_delayed_assignment_edges_to_add",
+        "_delayed_call_edges_to_add",
+        "_delayed_class_attributes_to_add",
+        "_dim",
+        "_ft",
+    )
+
     BUILTINS = dir(__builtins__)
 
     def __init__(self, filepath: str) -> None:

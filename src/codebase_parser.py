@@ -18,6 +18,11 @@ PYTHON = Language('build/my-languages.so', 'python')
 
 class ASTCodebaseParser(ASTFileParser):
 
+    __slots__ = [
+        '_dir',
+        '_relative_files',
+    ]
+
     BUILTINS = dir(__builtins__)
 
     def __init__(self, dir: str, dim: int) -> None:

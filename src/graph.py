@@ -1,6 +1,19 @@
 from typing import *
 
 class Node:
+
+    __slots__ = [
+        '_id',
+        '_start',
+        '_end',
+        '_file',
+        '_text',
+        '_type',
+        '_var_name',
+        '_adjacent',
+        '_parent',
+    ]
+
     def __init__(self, 
                  id: str,
                  start: str,
@@ -90,6 +103,12 @@ class Node:
         return descendants
 
 class Graph:
+
+    __slots__ = [
+        'vert_dict',
+        'num_vertices',
+    ]
+
     def __init__(self) -> None:
         self.vert_dict : Dict[str: Node]= {}
         self.num_vertices : int = 0
