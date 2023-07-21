@@ -172,8 +172,8 @@ class ASTCodebaseParser(ASTFileParser):
         if file in self._imports:
             if current_vertex.type == 'identifier' and not (parent_vertex.type == 'aliased_import' or parent_vertex.type == 'dotted_name'):
                 possible_imports = list(self._imports[file].keys())
-                import_ids = [i for _, (i, _) in self._imports[file].items()]
-                paths = [p for _, (_, p) in self._imports[file].items()]
+                import_ids = (i for _, (i, _) in self._imports[file].items())
+                paths = (p for _, (_, p) in self._imports[file].items())
                 
                 # if this is an attribute call, get the parent text instead
                 txt = parent.get_parent(node_id).text if parent.get_parent(node_id).type == 'attribute' else current_vertex.text
@@ -246,8 +246,8 @@ class ASTCodebaseParser(ASTFileParser):
         ### check if the function is part of an import in the current file ###
         if file in self._imports and parent_vertex and parent_vertex.type == 'call':
             possible_imports = list(self._imports[file].keys())
-            import_ids = [i for _, (i, _) in self._imports[file].items()]
-            paths = [p for _, (_, p) in self._imports[file].items()]
+            import_ids = (i for _, (i, _) in self._imports[file].items())
+            paths = (p for _, (_, p) in self._imports[file].items())
 
             txt = current_vertex.text
             if any([re.match(r'(^' + s + r'\.|^' + s + r'$)', txt) for s in possible_imports]):
@@ -331,7 +331,7 @@ class ASTCodebaseParser(ASTFileParser):
                         # connect to other files if necessary
                         if file in self._imports:
                             possible_imports = list(self._imports[file].keys())
-                            import_ids = [i for _, (i, _) in self._imports[file].items()]
+                            # import_ids = [i for _, (i, _) in self._imports[file].items()]
                             paths = [p for _, (_, p) in self._imports[file].items()]
                             type_ = object_type[object_type.rfind('.')+1:]
                             object_import = object_type[:object_type.rfind('.')]
@@ -360,8 +360,8 @@ class ASTCodebaseParser(ASTFileParser):
                 # check the prefix to get all the possible import paths it could come from
                 if file in self._imports:
                     possible_imports = list(self._imports[file].keys())
-                    import_ids = [i for _, (i, _) in self._imports[file].items()]
-                    paths = [p for _, (_, p) in self._imports[file].items()]
+                    import_ids = (i for _, (i, _) in self._imports[file].items())
+                    paths = (p for _, (_, p) in self._imports[file].items())
                     txt = attribute_prefix
                     while '.' in txt:
                         # first part is import

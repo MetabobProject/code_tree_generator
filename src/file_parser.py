@@ -342,7 +342,7 @@ class ASTFileParser():
                 xlabel=f'{n._start}->{n._end}',
                 label=n.file,
             )
-            edges.extend([(n.id, x.id) for x in n.get_connections()])
+            edges.extend((n.id, x.id) for x in n.get_connections())
 
         g.add_edges_from(edges)
         return g
@@ -356,9 +356,9 @@ class ASTFileParser():
         g : pgv.AGraph = self.convert_to_graphviz()
         g : nx.DiGraph = nx.nx_agraph.from_agraph(g)
 
-        nodes = [n for n in g.nodes()]
-        feats = [feat['xlabel'] for node, feat in dict(g.nodes(data=True)).items()]
-        files = [feat['label'] for node, feat in dict(g.nodes(data=True)).items()]
+        nodes = (n for n in g.nodes())
+        feats = (feat['xlabel'] for node, feat in dict(g.nodes(data=True)).items())
+        files = (feat['label'] for node, feat in dict(g.nodes(data=True)).items())
         node_feats = pd.DataFrame({'node': nodes, 'feat': feats, 'file': files})
         node_feats.to_csv(f"{nf}.csv", index = False)
         print(f'Saved node features to {nf}.csv')
