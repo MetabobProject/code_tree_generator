@@ -435,6 +435,10 @@ class ASTCodebaseParser(ASTFileParser):
 
             # traverse the rest of the function definition and add all attributes
             self._class_attribute(file, class_name, parent, child.id)
+    
+    def to_csv(self, nf: str, adj: str) -> None:
+        super().to_csv(nf, adj)
+        self._AST.delete_graph()
                     
 def main():
     arg_parser = argparse.ArgumentParser()
