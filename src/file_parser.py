@@ -364,9 +364,12 @@ class ASTFileParser():
         del node_feats
         del nodes
         del feats
+        del files
         adj_sparse = nx.to_scipy_sparse_array(g, dtype = np.bool_, weight = None)
         scipy.sparse.save_npz(adj, adj_sparse)
         print(f'Saved adjacency matrix to {adj}.npz')
+        del adj_sparse
+        gc.collect()
 
     def _to_networkx(self) -> nx.DiGraph:
         g : pgv.AGraph = self.convert_to_graphviz()
