@@ -61,7 +61,6 @@ class ASTFileParser():
 
         self._filepath = filepath
         self._tree : Tree = self._get_syntax_tree(self._filepath)
-        self._cursor : TreeCursor = self._tree.walk()
         self._root : Node = self._tree.root_node
 
         self._AST = G()
