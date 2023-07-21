@@ -1,5 +1,6 @@
 import gc
-from typing import *
+import typing as th
+
 
 class Node:
 
@@ -20,10 +21,10 @@ class Node:
                  start: str,
                  end: str,
                  file: str,
-                 text: Optional[str] = None,
-                 type: Optional[str] = None,
-                 var_name: Optional[str] = None,
-                 parent: Optional[Union['Node', None]] = None) -> None:
+                 text: th.Optional[str] = None,
+                 type: th.Optional[str] = None,
+                 var_name: th.Optional[str] = None,
+                 parent: th.Optional['Node'] = None) -> None:
         self._id = id
         self._start = start
         self._end = end
@@ -31,7 +32,7 @@ class Node:
         self._text = text
         self._type = type
         self._var_name = var_name
-        self._adjacent : Dict[Node, int] = {}
+        self._adjacent : th.Dict[Node, int] = {}
         self._parent = parent
 
     @property
@@ -75,11 +76,11 @@ class Node:
         self._var_name = value
     
     @property
-    def parent(self) -> Union['Node', None]:
+    def parent(self) -> th.Optional['Node']:
         return self._parent
 
     @parent.setter
-    def parent(self, value: Union['Node', None]) -> None:
+    def parent(self, value: th.Optional['Node']) -> None:
         if value is not None and not isinstance(value, Node):
             raise Exception("parent must be a Node or None for root nodes.")
         self._parent = value
@@ -90,14 +91,14 @@ class Node:
     def add_neighbor(self, neighbor: "Node", weight : float = 1.) -> None:
         self._adjacent[neighbor] = weight
 
-    def get_connections(self) -> List["Node"]:
+    def get_connections(self) -> th.List["Node"]:
         return self._adjacent.keys()
 
     def get_weight(self, neighbor: "Node") -> float:
         return self._adjacent[neighbor]
     
-    def get_descendants(self) -> List["Node"]:
-        descendants : List["Node"] = []
+    def get_descendants(self) -> th.List["Node"]:
+        descendants : th.List["Node"] = []
         for neighbor in self.get_connections():
             descendants.append(neighbor)
             descendants.extend(neighbor.get_descendants())
@@ -111,10 +112,10 @@ class Graph:
     ]
 
     def __init__(self) -> None:
-        self.vert_dict : Dict[str: Node]= {}
+        self.vert_dict : th.Dict[str: Node]= {}
         self.num_vertices : int = 0
     
-    def __iter__(self) -> Iterator[Node]:
+    def __iter__(self) -> th.Iterator[Node]:
         return iter(self.vert_dict.values())
     
     def __str__(self) -> str:
@@ -147,7 +148,7 @@ class Graph:
         if bi:
             self.vert_dict[to_].add_neighbor(self.vert_dict[from_], weight)
     
-    def get_vertices(self) -> List[str]:
+    def get_vertices(self) -> th.List[str]:
         return list(self.vert_dict.keys())
     
     def get_parent(self, id: str) -> Node:
