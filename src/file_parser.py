@@ -1,19 +1,19 @@
 import argparse
 import copy
-import sys
-from typing import *
+import gc
 import os
 import re
+import sys
+from typing import *
 
-from tree_sitter import Language, Node, Parser, Tree, TreeCursor
+import fasttext
+import fasttext.util
 import networkx as nx
 import numpy as np
 import pandas as pd
 import pygraphviz as pgv
-import fasttext
-import fasttext.util
 import scipy.sparse
-
+from tree_sitter import Language, Node, Parser, Tree
 
 from graph import Graph as G
 from graph import Node as N

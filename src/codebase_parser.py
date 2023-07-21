@@ -1,13 +1,13 @@
 import argparse
+import gc
 import os
-from typing import *
 import re
+from typing import *
 
-from tree_sitter import Language, Node, Parser, Tree, TreeCursor
+from tree_sitter import Language, Parser
 
 from file_parser import ASTFileParser
 from graph import Graph as G
-from graph import Node as N
 
 Language.build_library(
     'build/my-languages.so',
