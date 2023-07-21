@@ -1,3 +1,4 @@
+import gc
 from typing import *
 
 class Node:
@@ -165,6 +166,16 @@ class Graph:
             return node
         else:
             return None
+        
+    def delete_graph(self) -> None:
+        for node_id, node in self.vert_dict.items():
+            node.parent = None
+            node._adjacent.clear()
+            del node
+        self.vert_dict.clear()
+        self.num_vertices = 0
+        gc.collect()
+
 
 if __name__ == "__main__":
     print(Node('a', 'b', 'c'))
