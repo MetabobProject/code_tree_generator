@@ -87,6 +87,18 @@ class ASTCodebaseParser(ASTFileParser):
         self._add_delayed_assignment_edges(self._AST)
         self._add_delayed_call_edges(self._AST)
         self._add_delayed_attribute_edges(self._AST)
+        
+        self._cleanup()
+    
+    def _cleanup(self) -> None:
+        """
+            Delete and clear objects that are no longer needed.
+                All that needs to be kept at this point is the AST
+        """
+        super()._cleanup()
+        self._dir = None
+        self._relative_files = None
+        gc.collect()
 
     def _add_edges(self, parent: G) -> None:
         # connect import edges to their calls

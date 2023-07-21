@@ -118,6 +118,25 @@ class ASTFileParser():
             copy.deepcopy(self._classes),
         ]
 
+    def _cleanup(self) -> None:
+        """
+            Delete and clear objects that are no longer needed.
+                All that needs to be kept at this point is the AST
+        """
+        self._tree = None
+        self._root = None
+        self._counts.clear()
+        self._function_calls.clear()
+        self._imports.clear()
+        self._function_definitions.clear()
+        self._edges_to_add.clear()
+        self._assignments.clear()
+        self._classes.clear()
+        self._delayed_assignment_edges_to_add.clear()
+        self._delayed_call_edges_to_add.clear()
+        self._delayed_class_attributes_to_add.clear()
+        gc.collect()
+
     @property
     def AST(self) -> Dict[str, Any]:
         return self._AST
