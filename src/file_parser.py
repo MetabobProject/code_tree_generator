@@ -117,7 +117,7 @@ class ASTFileParser():
             copy.deepcopy(self._assignments),
             copy.deepcopy(self._classes),
         ]
-
+    
     def _cleanup(self) -> None:
         """
             Delete and clear objects that are no longer needed.
@@ -366,7 +366,7 @@ class ASTFileParser():
         return g
 
     def to_csv(self, nf: str, adj: str) -> None:
-        if not self._AST:
+        if not self._AST or self._AST.num_vertices == 0:
             raise Exception("AST is empty. Use parse() first.")
         self._to_csv(nf, adj)
 
@@ -462,7 +462,7 @@ class ASTFileParser():
         
         def get_node_type(node_id: str) -> str:
             return node_id[:node_id.rfind('_')] if ' | ' not in node_id else node_id.split(' | ')[0]
-        
+
         # extract features to columns
         df['start'] = df['feat'].apply(lambda x: x.split('->')[0])
         df['end'] = df['feat'].apply(lambda x: x.split('->')[1])
