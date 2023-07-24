@@ -27,6 +27,7 @@ Language.build_library(
 
 PYTHON = Language('build/my-languages.so', 'python')
 CONST = 10e-4
+FASTTEXT_MODEL_DIR = os.path.expanduser('~/nfsdata/workspace/code-tree-generator/')
 
 
 class ASTFileParser():
@@ -425,13 +426,14 @@ class ASTFileParser():
         
     def _csv_features_to_vectors(self, nf: str) -> None:
         df = pd.read_csv(f"{nf}.csv", header = 0)
-        if os.path.exists(f'cc.en.{self._dim // 4}.bin'):
-            ft = fasttext.load_model(f'cc.en.{self._dim // 4}.bin')
+        if os.path.exists(os.path.join(FASTTEXT_MODEL_DIR, f'cc.en.{self._dim // 4}.bin')):
+            ft = fasttext.load_model(os.path.join(FASTTEXT_MODEL_DIR, f'cc.en.{self._dim // 4}.bin'))
         else:
             fasttext.util.download_model('en', if_exists='ignore')
             ft = fasttext.load_model('cc.en.300.bin')
             fasttext.util.reduce_model(ft, self._dim // 4)
-            ft.save_model(f'cc.en.{self._dim // 4}.bin')
+            ft.save_model(os.path.join(FASTTEXT_MODEL_DIR, f'cc.en.{self._dim // 4}.bin'))
+            os.remove('cc.en.300.bin')
         self._ft = ft
 
         # define the embedding functions
