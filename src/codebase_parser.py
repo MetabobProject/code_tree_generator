@@ -11,7 +11,7 @@ from graph import Graph as G
 
 Language.build_library(
     'build/my-languages.so',
-    [os.path.expanduser('~/nfsdata/workspace/tree-sitter-python')]
+    [os.path.expanduser('./tree-sitter-python')]
 )
 
 PYTHON = Language('build/my-languages.so', 'python')
