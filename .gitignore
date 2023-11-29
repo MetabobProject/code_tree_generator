@@ -173,5 +173,3 @@ cc.en.*.bin.gz
 
 # numpy compressed
 *.npz
-
-tree-sitter-python/
