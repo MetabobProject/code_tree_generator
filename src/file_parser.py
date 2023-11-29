@@ -23,11 +23,11 @@ fasttext.FastText.eprint = lambda x: None
 DIR = os.path.dirname(__file__)
 
 Language.build_library(
-    os.path.join(DIR, '../build/my-languages.so'),
-    [os.path.expanduser(os.path.join(DIR, '../tree-sitter-python'))]
+    os.path.abspath(os.path.join(DIR, '../build/my-languages.so')),
+    [os.path.abspath(os.path.join(DIR, '../tree-sitter-python'))]
 )
 
-PYTHON = Language(os.path.join(DIR, '../build/my-languages.so'), 'python')
+PYTHON = Language(os.path.abspath(os.path.join(DIR, '../build/my-languages.so')), 'python')
 CONST = 10e-4
 FASTTEXT_MODEL_DIR = os.path.join(DIR, '../')
 

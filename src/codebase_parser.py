@@ -12,11 +12,11 @@ from .graph import Graph as G
 DIR = os.path.dirname(__file__)
 
 Language.build_library(
-    os.path.join(DIR, '../build/my-languages.so'),
-    [os.path.expanduser(os.path.join(os.path.dirname(__file__), '../tree-sitter-python'))]
+    os.path.abspath(os.path.join(DIR, '../build/my-languages.so')),
+    [os.path.abspath(os.path.join(os.path.dirname(__file__), '../tree-sitter-python'))]
 )
 
-PYTHON = Language(os.path.join(DIR, '../build/my-languages.so'), 'python')
+PYTHON = Language(os.path.abspath(os.path.join(DIR, '../build/my-languages.so')), 'python')
 
 class ASTCodebaseParser(ASTFileParser):
 
