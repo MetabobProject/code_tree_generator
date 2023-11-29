@@ -9,12 +9,14 @@ from tree_sitter import Language, Parser
 from .file_parser import ASTFileParser
 from .graph import Graph as G
 
+DIR = os.path.dirname(__file__)
+
 Language.build_library(
-    'build/my-languages.so',
-    [os.path.expanduser('./tree-sitter-python')]
+    os.path.join(DIR, '../build/my-languages.so'),
+    [os.path.expanduser(os.path.join(os.path.dirname(__file__), '../tree-sitter-python'))]
 )
 
-PYTHON = Language('build/my-languages.so', 'python')
+PYTHON = Language(os.path.join(DIR, '../build/my-languages.so'), 'python')
 
 class ASTCodebaseParser(ASTFileParser):
 

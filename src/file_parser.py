@@ -20,14 +20,16 @@ from .graph import Node as N
 
 fasttext.FastText.eprint = lambda x: None
 
+DIR = os.path.dirname(__file__)
+
 Language.build_library(
-    'build/my-languages.so',
-    [os.path.expanduser('./tree-sitter-python')]
+    os.path.join(DIR, '../build/my-languages.so'),
+    [os.path.expanduser(os.path.join(DIR, '../tree-sitter-python'))]
 )
 
-PYTHON = Language('build/my-languages.so', 'python')
+PYTHON = Language(os.path.join(DIR, '../build/my-languages.so'), 'python')
 CONST = 10e-4
-FASTTEXT_MODEL_DIR = os.path.expanduser('~/nfsdata/workspace/code-tree-generator/')
+FASTTEXT_MODEL_DIR = os.path.join(DIR, '../')
 
 
 class ASTFileParser():
