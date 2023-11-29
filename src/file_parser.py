@@ -29,7 +29,7 @@ Language.build_library(
 
 PYTHON = Language(os.path.abspath(os.path.join(DIR, '../build/my-languages.so')), 'python')
 CONST = 10e-4
-FASTTEXT_MODEL_DIR = os.path.join(DIR, '../')
+FASTTEXT_MODEL_DIR = os.path.abspath(os.path.join(DIR, '../'))
 
 
 class ASTFileParser():
@@ -436,6 +436,7 @@ class ASTFileParser():
             fasttext.util.reduce_model(ft, self._dim // 4)
             ft.save_model(os.path.join(FASTTEXT_MODEL_DIR, f'cc.en.{self._dim // 4}.bin'))
             os.remove('cc.en.300.bin')
+            os.remove('cc.en.300.bin.gz')
         self._ft = ft
 
         # define the embedding functions
