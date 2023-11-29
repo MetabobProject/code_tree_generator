@@ -6,8 +6,8 @@ from typing import *
 
 from tree_sitter import Language, Parser
 
-from file_parser import ASTFileParser
-from graph import Graph as G
+from .file_parser import ASTFileParser
+from .graph import Graph as G
 
 Language.build_library(
     'build/my-languages.so',

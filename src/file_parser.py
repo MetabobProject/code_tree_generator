@@ -15,8 +15,8 @@ import pygraphviz as pgv
 import scipy.sparse
 from tree_sitter import Language, Node, Parser, Tree
 
-from graph import Graph as G
-from graph import Node as N
+from .graph import Graph as G
+from .graph import Node as N
 
 fasttext.FastText.eprint = lambda x: None
 
