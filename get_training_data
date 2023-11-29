@@ -40,7 +40,7 @@ for folder in $(ls "$search_dir"); do
     echo -n "${base}..."
     if [ ! -f "${adj_dir}${base}.npz" ] && [ ! -f "${node_feat_dir}${base}.csv" ]; then
       # run the python script for generating the tree
-      python3 src/codebase_parser.py \
+      python3 parser.py \
         --dir "$full_path" \
         --nf "${node_feat_dir}${base}" \
         --adj "${adj_dir}${base}" \
